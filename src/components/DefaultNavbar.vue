@@ -3,26 +3,24 @@
     <nav style="margin-right: 3%;">
       <ul>
         <img
-          src="./icons/logo.png"
+          src="/src/assets/logo.png"
           style="width: 140px; height: 120px"
         />
-        <hgroup>
-          <h1>go-gate</h1>
-          <p>A lightweight and simple API gateway</p>
-        </hgroup>
+        <h1>go-gate</h1>
       </ul>
       <ul>
-        <li><a href="/" class="contrast">Home 🏠</a></li>
+        <li><a href="/" class="contrast">🏠 Home</a></li>
         <li>
           <details class="dropdown">
             <summary>Services</summary>
             <ul>
-              <li><a href="/dashboard">Dashboard 📊</a></li>
-              <li><a href="/proxy">Proxy Mapping 📚</a></li>
+              <li><a href="/dashboard">📊 Dashboard</a></li>
+              <li><a href="/mapping">🔀 Request Mapping</a></li>
             </ul>
           </details>
         </li>
         <li>|</li>
+        <li><a href="https://github.com/A-Oez/go-gate"><kbd>GitHub</kbd></a></li>
       </ul>
     </nav>
   </div>
