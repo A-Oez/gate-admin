@@ -27,16 +27,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="entry in mappings" :key="entry.id">
-          <td>{{ entry.publicPath }}</td>
+        <tr v-for="mapping in mappings" :key="mapping.id">
+          <td>{{ mapping.public_path }}</td>
           <td>
-            <span :class="['method-label', entry.method.toLowerCase()]" style="text-transform: uppercase;">
-              {{ entry.method }}
+            <span :class="['method-label', mapping.method.toLowerCase()]" style="text-transform: uppercase;">
+              {{ mapping.method }}
             </span>
           </td>
-          <td>{{ entry.serviceHost }}</td>
-          <td>{{ entry.servicePath }}</td>
-          <td>{{ entry.serviceScheme }}</td>
+          <td>{{ mapping.service_host }}</td>
+          <td>{{ mapping.service_path }}</td>
+          <td>{{ mapping.service_scheme }}</td>
         </tr>
       </tbody>
     </table>
@@ -44,24 +44,21 @@
 </template>
 
 <script setup>
-const mappings = [
-  {
-    id: 1,
-    publicPath: '/api',
-    method: 'GET',
-    serviceHost: 'apitest:8080',
-    servicePath: '/test',
-    serviceScheme: 'http',
-  },
-  {
-    id: 2,
-    publicPath: '/user',
-    method: 'POST',
-    serviceHost: 'authservice:8000',
-    servicePath: '/login',
-    serviceScheme: 'http',
-  }
-]
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+
+const mappings = ref([])
+const error = ref(null)
+
+onMounted(() => {
+  axios.get(`/api/mapping`)
+    .then(response => {
+      mappings.value = response.data
+    })
+    .catch(err => {
+      console.error(err)
+    })
+})
 </script>
 
 <style scoped>
