@@ -6,11 +6,11 @@
     </hgroup>
   </section>
 
-  <section style="margin-top: 5%;">
-    <details class="dropdown" style="width: 25%;">
+  <section style="margin-top: 5%">
+    <details class="dropdown" style="width: 25%">
       <summary>⚙️ Manage</summary>
-      <ul>
-        <li><a>➕ Create Item</a></li>
+      <ul style="cursor: pointer;">
+        <li><a @click="showNewModal = true">➕ Create Item</a></li>
         <li><a>✏️ Edit Item</a></li>
         <li><a>🗑️ Delete Item</a></li>
       </ul>
@@ -30,7 +30,10 @@
         <tr v-for="mapping in mappings" :key="mapping.id">
           <td>{{ mapping.public_path }}</td>
           <td>
-            <span :class="['method-label', mapping.method.toLowerCase()]" style="text-transform: uppercase;">
+            <span
+              :class="['method-label', mapping.method.toLowerCase()]"
+              style="text-transform: uppercase"
+            >
               {{ mapping.method }}
             </span>
           </td>
@@ -41,24 +44,29 @@
       </tbody>
     </table>
   </section>
+  <NewMappingModal v-show="showNewModal" @close="showNewModal = false"/>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import NewMappingModal from '@/components/modal/NewMappingModal.vue'
 
+const showNewModal = ref(false)
 const mappings = ref([])
 const error = ref(null)
 
 onMounted(() => {
-  axios.get(`/api/mapping`)
-    .then(response => {
+  axios
+    .get(`/api/mapping`)
+    .then((response) => {
       mappings.value = response.data
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err)
     })
 })
+
 </script>
 
 <style scoped>
