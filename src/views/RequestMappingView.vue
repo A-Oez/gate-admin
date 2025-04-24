@@ -44,7 +44,7 @@
       </tbody>
     </table>
   </section>
-  <NewMappingModal v-show="showNewModal" @close="showNewModal = false"/>
+  <NewMappingModal v-if="showNewModal" @close="handleModalClose()" />
 </template>
 
 <script setup>
@@ -57,15 +57,24 @@ const mappings = ref([])
 const error = ref(null)
 
 onMounted(() => {
+  getRoutes()
+})
+
+function handleModalClose(){
+  showNewModal.value = false;
+  getRoutes()
+}
+
+function getRoutes(){
   axios
-    .get(`/api/mapping`)
+    .get(`/api/routes`)
     .then((response) => {
       mappings.value = response.data
     })
     .catch((err) => {
       console.error(err)
     })
-})
+}
 
 </script>
 
