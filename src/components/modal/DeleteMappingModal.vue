@@ -36,9 +36,14 @@ const toDelete = ref([])
 const { mappings, getRoutes } = useRoutes()
 
 function deleteRoutes() {
-    if (window.confirm("Are you sure you want to delete all the selected items?")) {
-        console.log(toDelete.value) //TODO: add deletion request 
-    }
-}
+  if (window.confirm('Are you sure you want to delete all the selected items?')) {
+    toDelete.value.forEach((id) => {
+      axios.delete(`/api/routes/` + id).catch((err) => {
+        console.error(err)
+      })
+    })
 
+    getRoutes()
+  }
+}
 </script>
