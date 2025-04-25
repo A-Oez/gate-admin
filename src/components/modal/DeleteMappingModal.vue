@@ -34,6 +34,7 @@ import { useRoutes } from '@/composables/useRoutes'
 
 const toDelete = ref([])
 const { mappings, getRoutes } = useRoutes()
+const emit = defineEmits();
 
 function deleteRoutes() {
   if (window.confirm('Are you sure you want to delete all the selected items?')) {
@@ -44,6 +45,8 @@ function deleteRoutes() {
     })
 
     getRoutes()
+    emit('close')
+    toDelete.value = []
   }
 }
 </script>

@@ -11,7 +11,7 @@
       <summary>⚙️ Manage</summary>
       <ul style="cursor: pointer;">
         <li><a @click="modals.new = true">➕ Create Item</a></li>
-        <li><a>✏️ Edit Item</a></li>
+        <li><a @click="modals.edit = true">✏️ Edit Item</a></li>
         <li><a @click="modals.delete = true">🗑️ Delete Item</a></li>
       </ul>
     </details>
@@ -46,23 +46,27 @@
   </section>
   <NewMappingModal v-if="modals.new" @close="handleModalClose()" />
   <DeleteMappingModal v-if="modals.delete" @close="handleModalClose()" />
+  <EditMappingModal v-if="modals.edit" @close="handleModalClose()" />
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import NewMappingModal from '@/components/modal/NewMappingModal.vue'
 import DeleteMappingModal from '@/components/modal/DeleteMappingModal.vue'
+import EditMappingModal from '@/components/modal/EditMappingModal.vue'
 import { useRoutes } from '@/composables/useRoutes'
 
 const { mappings, getRoutes } = useRoutes()
 const modals = ref({
   new: false,
-  delete: false
+  delete: false,
+  edit: false
 })
 
 function handleModalClose(){
   modals.value.new = false;
   modals.value.delete = false
+  modals.value.edit = false
   getRoutes()
 }
 
