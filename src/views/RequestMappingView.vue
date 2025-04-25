@@ -10,9 +10,9 @@
     <details class="dropdown" style="width: 25%">
       <summary>⚙️ Manage</summary>
       <ul style="cursor: pointer;">
-        <li><a @click="showNewModal = true">➕ Create Item</a></li>
+        <li><a @click="modals.new = true">➕ Create Item</a></li>
         <li><a>✏️ Edit Item</a></li>
-        <li><a>🗑️ Delete Item</a></li>
+        <li><a @click="modals.delete = true">🗑️ Delete Item</a></li>
       </ul>
     </details>
 
@@ -44,36 +44,26 @@
       </tbody>
     </table>
   </section>
-  <NewMappingModal v-if="showNewModal" @close="handleModalClose()" />
+  <NewMappingModal v-if="modals.new" @close="handleModalClose()" />
+  <DeleteMappingModal v-if="modals.delete" @close="handleModalClose()" />
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
+import { ref } from 'vue'
 import NewMappingModal from '@/components/modal/NewMappingModal.vue'
+import DeleteMappingModal from '@/components/modal/DeleteMappingModal.vue'
+import { useRoutes } from '@/composables/useRoutes'
 
-const showNewModal = ref(false)
-const mappings = ref([])
-const error = ref(null)
-
-onMounted(() => {
-  getRoutes()
+const { mappings, getRoutes } = useRoutes()
+const modals = ref({
+  new: false,
+  delete: false
 })
 
 function handleModalClose(){
-  showNewModal.value = false;
+  modals.value.new = false;
+  modals.value.delete = false
   getRoutes()
-}
-
-function getRoutes(){
-  axios
-    .get(`/api/routes`)
-    .then((response) => {
-      mappings.value = response.data
-    })
-    .catch((err) => {
-      console.error(err)
-    })
 }
 
 </script>
