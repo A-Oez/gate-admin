@@ -9,13 +9,13 @@
       </header>
 
       <p>Select the entry you want to edit:</p>
-      <select name="select" aria-label="Select" required v-model="route">
+      <select name="select" aria-label="Select" required v-model="route"  @change="routeSelected = true">
         <option v-for="mapping in mappings" :key="mapping.id" :value="mapping">
-          {{ mapping.public_path }} → {{ mapping.service_host }}
+          Public Path: {{ mapping.public_path }} → Method: {{ mapping.method }}
         </option>
       </select>
 
-      <section v-if="route.public_path.length > 0">
+      <section v-if="routeSelected">
         <hr />
         <form>
         <fieldset>
@@ -56,7 +56,7 @@
             </span>
             <input v-model="route.service_scheme" placeholder="http, https" autocomplete="off" :aria-invalid="validations.service_scheme"/>
           </label>
-          <input v-if="!hasErrors()" @click="updateRoute()" type="submit" value="Create"/>
+          <input v-if="!hasErrors()" @click="updateRoute()" type="submit" value="Update"/>
         </fieldset>
       </form>
       </section>
@@ -71,6 +71,7 @@ import { useRoutes } from '@/composables/useRoutes'
 import { validateRoutes } from '@/composables/validateRoutes'
 
 const { mappings, _ } = useRoutes()
+const routeSelected = ref(false)
 
 const route = ref({
   public_path: "",
