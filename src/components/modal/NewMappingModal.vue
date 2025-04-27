@@ -29,21 +29,21 @@
           <label>
             <p class="input-label">Service Host</p>
             <span v-if="errorMessage.service_host.length > 0" class="error-message">
-                {{ errorMessage.method }}
+                {{ errorMessage.service_host }}
             </span>
             <input v-model="route.service_host" placeholder="example.com:8080" autocomplete="off" :aria-invalid="validations.service_host"/>
           </label>
           <label>
             <p class="input-label">Service Path</p>
             <span v-if="errorMessage.service_path.length > 0" class="error-message">
-                {{ errorMessage.method }}
+                {{ errorMessage.service_path }}
             </span>
             <input v-model="route.service_path" placeholder="/users/{id}" autocomplete="off" :aria-invalid="validations.service_path"/>
           </label>
           <label>
             <p class="input-label">Service Scheme</p>
             <span v-if="errorMessage.service_scheme.length > 0" class="error-message">
-                {{ errorMessage.method }}
+                {{ errorMessage.service_scheme }}
             </span>
             <input v-model="route.service_scheme" placeholder="http, https" autocomplete="off" :aria-invalid="validations.service_scheme"/>
           </label>

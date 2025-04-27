@@ -28,6 +28,9 @@ export function validateRoutes(route, validations, errorMessage){
         if(public_path.length == 0){
             validations.value.public_path = true
             errorMessage.value.public_path = "This field cannot be empty!"
+        } else if(public_path.substring(0,4) != "/api"){
+            validations.value.public_path = true
+            errorMessage.value.public_path = "Public path must start with /api"
         } else {
             validations.value.public_path = false;
             errorMessage.value.public_path = "";
@@ -38,6 +41,9 @@ export function validateRoutes(route, validations, errorMessage){
         if(method.length == 0){
             validations.value.method = true
             errorMessage.value.method = "This field cannot be empty!"
+        } else if(method.length > 10){
+            validations.value.method = true
+            errorMessage.value.method = "Maximum 10 characters allowed!"
         } else {
             validations.value.method = false;
             errorMessage.value.method = "";
@@ -68,6 +74,9 @@ export function validateRoutes(route, validations, errorMessage){
         if(service_scheme.length == 0){
             validations.value.service_scheme = true
             errorMessage.value.service_scheme = "This field cannot be empty!"
+        } else if(service_scheme.length > 10){
+            validations.value.service_scheme = true
+            errorMessage.value.service_scheme = "Maximum 10 characters allowed!"
         } else {
             validations.value.service_scheme = false;
             errorMessage.value.service_scheme = "";
