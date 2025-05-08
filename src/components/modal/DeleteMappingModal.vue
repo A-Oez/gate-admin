@@ -39,7 +39,7 @@ const emit = defineEmits();
 function deleteRoutes() {
   if (window.confirm('Are you sure you want to delete all the selected items?')) {
     toDelete.value.forEach((id) => {
-      axios.delete(`/api/routes/` + id).catch((err) => {
+      axios.delete(`/admin/routes/` + id).catch((err) => {
         console.error(err)
       })
     })

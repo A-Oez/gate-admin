@@ -92,7 +92,7 @@ function hasErrors(){
 
 function createNewRoute(){ 
   axios
-    .post(`/api/routes`, route.value)
+    .post(`/admin/routes`, route.value)
     .catch((err) => {
       console.error(err)
     })

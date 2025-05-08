@@ -24,7 +24,7 @@
                 type="email"
                 required
                 autocomplete="email"
-                v-model="email"
+                v-model="credentials.email"
               />
             </label>
 
@@ -36,7 +36,7 @@
                 type="password"
                 required
                 autocomplete="current-password"
-                v-model="password"
+                v-model="credentials.password"
               />
             </label>
           </fieldset>
@@ -49,13 +49,22 @@
 </template>
 
 <script setup>
+import axios from 'axios'
 import { ref } from 'vue'
 import Navbar from '../components/LoggingNavbar.vue'
 
-const email = ref('')
-const password = ref('')
+const credentials = ref({
+  email: "",
+  password: ""
+})
 
 function onLogin() {
-  //TODO: create login call
+  axios.post(`/admin/login`, credentials.value)
+    .then(response => {
+      console.log(response.data); //TODO: store data
+    })
+    .catch((err) => {
+      console.error(err)
+    })
 }
 </script>

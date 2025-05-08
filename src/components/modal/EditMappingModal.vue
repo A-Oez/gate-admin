@@ -105,7 +105,7 @@ function hasErrors(){
 
 function updateRoute() {
   if (window.confirm('Do you really want to update all the information?')) {
-    axios.put(`/api/routes/` + route.id, route.value).catch((err) => {
+    axios.put(`/admin/routes/` + route.id, route.value).catch((err) => {
       console.error(err)
     })
   }

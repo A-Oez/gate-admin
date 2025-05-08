@@ -8,7 +8,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 export default defineConfig({
   server: {
     proxy: {
-      '/api': {
+      '/admin': {
         target: 'http://localhost:5000',
         changeOrigin: true,
         secure: false,
