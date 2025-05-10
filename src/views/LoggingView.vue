@@ -52,6 +52,7 @@
 import axios from 'axios'
 import { ref } from 'vue'
 import Navbar from '../components/LoggingNavbar.vue'
+import { useSessionTimeStore } from '@/stores/session_timestamp'
 
 const credentials = ref({
   email: "",
@@ -61,7 +62,8 @@ const credentials = ref({
 function onLogin() {
   axios.post(`/admin/login`, credentials.value)
     .then(response => {
-      console.log(response.data); //TODO: store data
+      useSessionTimeStore().setTimestamp(response.data)
+      useSessionTimeStore().setLoggedIn(true)
     })
     .catch((err) => {
       console.error(err)

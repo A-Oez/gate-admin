@@ -6,7 +6,7 @@ export function useRoutes() {
 
   function getRoutes() {
     axios
-      .get(`/api/routes`)
+      .get(`/admin/routes`)
       .then((response) => {
         mappings.value = response.data
       })
