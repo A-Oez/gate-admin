@@ -8,7 +8,7 @@ export const useSessionTimeStore = defineStore('session', {
   actions: {
     setTimestamp(timestamp) {
       this.timestamp = timestamp
-      localStorage.setItem('session_timestamp', timestamp)
+      localStorage.setItem('session_timestamp', new Date(timestamp))
     },
     setLoggedIn(status) {
       this.loggedIn = status
@@ -22,7 +22,7 @@ export const useSessionTimeStore = defineStore('session', {
 
       const ts = localStorage.getItem('session_timestamp')
       if(ts){
-        this.timestamp = ts
+        this.timestamp = new Date(ts)
       }
     }
   }
