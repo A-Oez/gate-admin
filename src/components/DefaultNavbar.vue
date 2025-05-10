@@ -20,9 +20,17 @@
           </details>
         </li>
         <li>|</li>
+        <li><button class="contrast" @click="logOut()">Logout</button></li>
         <li><a href="https://github.com/A-Oez/go-gate"><kbd>GitHub</kbd></a></li>
       </ul>
     </nav>
   </div>
   <hr />
 </template>
+
+<script setup>
+function logOut(){
+  localStorage.setItem('loggedIn', JSON.stringify(false))
+  window.location.reload();
+}
+</script>
