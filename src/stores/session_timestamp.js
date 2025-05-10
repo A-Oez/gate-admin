@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const useSessionTimeStore = defineStore('session_time', {
+export const useSessionTimeStore = defineStore('session', {
   state: () => ({
     timestamp: null,
     loggedIn: false, 
@@ -14,10 +14,15 @@ export const useSessionTimeStore = defineStore('session_time', {
       this.loggedIn = status
       localStorage.setItem('loggedIn', status)
     },
-    loadLoggedInFromStorage() {
+    loadFromStorage() {
       const storedStatus = localStorage.getItem('loggedIn')
-      if (storedStatus !== null) {
+      if (storedStatus) {
         this.loggedIn = storedStatus
+      }
+
+      const ts = localStorage.getItem('session_timestamp')
+      if(ts){
+        this.timestamp = ts
       }
     }
   }
