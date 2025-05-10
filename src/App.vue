@@ -8,11 +8,16 @@ import { onMounted } from 'vue'
 import { RouterView } from 'vue-router'
 import LoggingView from '@/views/LoggingView.vue'
 import { useSessionTimeStore } from '@/stores/session_timestamp'
+import { useSessionLogout } from '@/composables/useSessionLogout'
 
 const sessionStore = useSessionTimeStore()
 
 onMounted(() => {
   sessionStore.loadFromStorage()
+  
+  if(sessionStore.timestamp != null && (new Date().getTime() > sessionStore.timestamp)) {
+    useSessionLogout().logout()
+  }
 })
 </script>
 

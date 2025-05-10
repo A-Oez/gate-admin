@@ -20,7 +20,7 @@
           </details>
         </li>
         <li>|</li>
-        <li><button class="contrast" @click="logOut()">Logout</button></li>
+        <li><button class="contrast" @click="useSessionLogout().logout()">Logout</button></li>
         <li><a href="https://github.com/A-Oez/go-gate"><kbd>GitHub</kbd></a></li>
       </ul>
     </nav>
@@ -29,8 +29,5 @@
 </template>
 
 <script setup>
-function logOut(){
-  localStorage.setItem('loggedIn', JSON.stringify(false))
-  window.location.reload();
-}
+import { useSessionLogout } from '@/composables/useSessionLogout'
 </script>
