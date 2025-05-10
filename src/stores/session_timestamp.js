@@ -12,12 +12,12 @@ export const useSessionTimeStore = defineStore('session', {
     },
     setLoggedIn(status) {
       this.loggedIn = status
-      localStorage.setItem('loggedIn', status)
+      localStorage.setItem('loggedIn', JSON.stringify(status))
     },
     loadFromStorage() {
       const storedStatus = localStorage.getItem('loggedIn')
       if (storedStatus) {
-        this.loggedIn = storedStatus
+        this.loggedIn = JSON.parse(storedStatus)
       }
 
       const ts = localStorage.getItem('session_timestamp')
