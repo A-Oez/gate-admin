@@ -5,16 +5,18 @@
 
   <section style="margin-top: 2rem">
     <div class="grid">
-      <article>
-        <header><strong>Select Route</strong></header>
-        <select>
+      <div>
+        <p><strong>Select Route</strong></p>
+          <select style="width: 75%;">
           <option>Route A</option>
           <option>Route B</option>
         </select>
-      </article>
-      <article>
+      </div>
+
+      <article style="box-shadow: none;">
         <header><strong>System Metrics</strong></header>
         <p>Requests per minute, average latency etc.</p>
+        <Bar :data="chartData" :options="chartOptions" />
       </article>
     </div>
   </section>
@@ -75,3 +77,41 @@
     </table>
   </section>
 </template>
+
+<script setup>
+import { Bar } from 'vue-chartjs'
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+} from 'chart.js'
+
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+
+const chartData = {
+  labels: ['Test1', 'Test2', 'Test3'],
+  datasets: [
+    {
+      label: 'Test',
+      data: [40, 20, 80],
+      backgroundColor: ['#f87171', '#60a5fa', '#34d399'],
+    },
+  ],
+}
+
+const chartOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top',
+    },
+    title: {
+      display: true,
+    },
+  },
+}
+</script>
