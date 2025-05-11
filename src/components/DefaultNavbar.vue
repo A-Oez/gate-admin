@@ -14,7 +14,7 @@
           <details class="dropdown">
             <summary>Services</summary>
             <ul>
-              <li><a href="/dashboard">📊 Dashboard</a></li>
+              <li><a href="/logs">📊 Logs & Insights</a></li>
               <li><a href="/mapping">🔀 Request Mapping</a></li>
             </ul>
           </details>

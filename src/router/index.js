@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
-import DashboardView from '@/views/DashboardView.vue'
+import LogsView from '@/views/LogsView.vue'
 import RequestMappingView from '@/views/RequestMappingView.vue'
 
 const router = createRouter({
@@ -12,8 +12,8 @@ const router = createRouter({
       component: DefaultLayout,
       children: [
         {
-          path: 'dashboard',
-          component: DashboardView,
+          path: 'logs',
+          component: LogsView,
         },
         {
           path: 'mapping',
