@@ -1,30 +1,18 @@
 <template>
-  <RouterView v-if="sessionStore.loggedIn" />
-  <LoggingView v-else />
+  <v-app>
+    <v-main>
+      <v-container class="fill-height d-flex align-center justify-center">
+        <v-card width="400">
+          <v-card-title class="text-h5">Welcomte to Vuetify 3</v-card-title>
+          <v-card-text>
+            <p>Basic example.</p>
+            <v-btn color="primary" icon>
+              <v-icon>mdi-thumb-up</v-icon>
+            </v-btn>
+            <v-btn color="primary" class="ml-2">Button</v-btn>
+          </v-card-text>
+        </v-card>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
-
-<script setup>
-import { onMounted } from 'vue'
-import { RouterView } from 'vue-router'
-import LoggingView from '@/views/LoggingView.vue'
-import { useSessionTimeStore } from '@/stores/session_timestamp'
-import { useSessionLogout } from '@/composables/useSessionLogout'
-
-const sessionStore = useSessionTimeStore()
-
-onMounted(() => {
-  sessionStore.loadFromStorage()
-  
-  if(sessionStore.timestamp != null && (new Date().getTime() > sessionStore.timestamp)) {
-    useSessionLogout().logout()
-  }
-})
-</script>
-
-<style>
-html, body, #app {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-</style>
